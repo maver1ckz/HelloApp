@@ -1,18 +1,32 @@
 /**
- * HelloApp.java - A simple Java application that greets the user by name if
- * provided as a command-line argument, or defaults to greeting "World" if no name is
- * given. This use case demonstrates how to handle optional command-line arguments and
- * provide default values in Java.
+ * HelloApp - UC4 - A simple Java application that greets multiple users by name if
+ * provided as command-line arguments, or defaults to greeting "World" if no names are given.
  *
  * @author Developer Name
- * @version 3.0
+ * @version 4.0
  */
 public class HelloApp {
     public static void main(String[] args) {
-        // Use a ternary operator to check if an argument exists and assign the name [cite: 1601-1603, 1610, 1647-1650, 1653-1658]
-        String name = (args.length > 0) ? args[0] : "World";
+        String name = "World"; // Default value [cite: 1741]
         
-        // Display the personalized greeting [cite: 1604, 1607]
+        // Check if arguments exist [cite: 1725]
+        if (args.length > 0) {
+            // Use StringBuilder to efficiently build the string from multiple parts [cite: 1746, 1787]
+            StringBuilder nameBuilder = new StringBuilder();
+            
+            // Loop through all command-line arguments [cite: 1747, 1782-1783]
+            for (int i = 0; i < args.length; i++) {
+                nameBuilder.append(args[i]);
+                
+                // Add a comma and space if it is not the last name 
+                if (i < args.length - 1) {
+                    nameBuilder.append(", ");
+                }
+            }
+            name = nameBuilder.toString();
+        }
+        
+        // Display the final personalized greeting [cite: 1729]
         System.out.println("Hello, " + name + "!");
     }
 }
